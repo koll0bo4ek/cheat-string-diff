@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+
+    <title>Cheat String Diff</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- ==================================
+           ЛЕВАЯ ПАНЕЛЬ: ВСЁ, ЧТО ВЫ ВВОДИТЕ
+      =================================== -->
+      <aside class="side">
+        <div class="side-scroll">
+          <div class="brand">
+            <!-- Знак: cheat минус clean. Закрашен только тот «месяц»,
+                 который есть у чита и которого нет в чистых дампах. -->
+            <svg class="mark" viewBox="0 0 44 44" aria-hidden="true">
+              <defs>
+                <mask id="markMask">
+                  <rect width="44" height="44" fill="#000" />
+                  <circle cx="16" cy="22" r="12" fill="#fff" />
+                  <circle cx="28" cy="22" r="12" fill="#000" />
+                </mask>
+              </defs>
+              <rect width="44" height="44" class="mark-fill" mask="url(#markMask)" />
+              <circle cx="16" cy="22" r="12" class="mark-cheat" />
+              <circle cx="28" cy="22" r="12" class="mark-clean" />
+            </svg>
+
+            <div>
+              <div class="brand-name">Cheat String Diff</div>
+              <div class="brand-sub">строки чита минус чистые дампы</div>
+            </div>
+          </div>
+
+          <section>
+            <div class="group-head">
+              <h2>Clean-дампы <span id="count-clean" class="count" data-state="need">0 из 2</span></h2>
+              <button type="button" class="link" data-action="add" data-group="clean">+ Добавить</button>
+            </div>
+
+            <div class="dropzone" data-group="clean">
+              <p class="drop-hint">Перетащите сюда дампы без чита</p>
+              <ul class="filelist" data-group="clean"></ul>
+            </div>
+          </section>
+
+          <section>
+            <div class="group-head">
+              <h2>Cheat-дампы <span id="count-cheat" class="count" data-state="need">0 из 1</span></h2>
+              <button type="button" class="link" data-action="add" data-group="cheat">+ Добавить</button>
+            </div>
+
+            <div class="dropzone cheat" data-group="cheat">
+              <p class="drop-hint">Перетащите сюда дампы с запущенным читом</p>
+              <ul class="filelist cheat" data-group="cheat"></ul>
+            </div>
+          </section>
+
+          <details class="params">
+            <summary>
+              <span class="params-text">
+                <strong>Параметры фильтрации</strong>
+                <small id="paramsSummary">длина от 8, энтропия от 2.6</small>
+              </span>
+              <span class="chevron" aria-hidden="true"></span>
+            </summary>
+
+            <fieldset id="params" class="params-grid">
+              <label class="field">
+                <span>Длина от</span>
+                <input id="minLen" type="number" min="1" max="256" step="1" value="8" />
+                <small>Короче отбрасываем</small>
+              </label>
+
+              <label class="field">
+                <span>Энтропия от</span>
+                <input id="minEntropy" type="number" min="0" max="8" step="0.1" value="2.6" />
+                <small>Выше значит «случайнее»</small>
+              </label>
+
+              <label class="field">
+                <span>Гласных не больше</span>
+                <input id="maxVowel" type="number" min="0" max="1" step="0.05" value="0.3" />
+                <small>В тексте гласных больше</small>
+              </label>
+
+              <label class="field">
+                <span>Уникальных символов</span>
+                <input id="minUnique" type="number" min="1" max="64" step="1" value="4" />
+                <small>Отсекает abababab</small>
+              </label>
+
+              <label class="field wide">
+                <span>Минимум cheat-дампов со строкой</span>
+                <input id="minHits" type="number" min="1" step="1" placeholder="во всех" />
+                <small>Пусто: строка должна быть во всех cheat-дампах</small>
+              </label>
+
+              <button id="resetParams" type="button" class="link wide">Сбросить по умолчанию</button>
+            </fieldset>
+          </details>
+
+          <details class="log">
+            <summary>Журнал движка</summary>
+            <pre id="log"></pre>
+          </details>
+        </div>
+
+        <!-- ==================================
+             ЗАПУСК: ВСЕГДА ВИДНО ВНИЗУ
+        =================================== -->
+        <div class="run">
+          <p id="runHint" class="run-hint"></p>
+
+          <div class="stage">
+            <span id="stage">Готов к запуску</span>
+            <b id="percent">0%</b>
+          </div>
+
+          <div
+            id="steps"
+            class="steps"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-labelledby="stage"
+          ></div>
+
+          <button id="runBtn" type="button" class="btn-run" disabled>Запустить анализ</button>
+          <button id="cancelBtn" type="button" class="btn-run cancel" hidden>Отменить анализ</button>
+
+          <p class="py"><span id="pyStatus" data-state="wait">Python: проверка</span></p>
+        </div>
+      </aside>
+
+      <!-- ==================================
+           ПРАВАЯ ЧАСТЬ: РЕЗУЛЬТАТ
+      =================================== -->
+      <main class="main">
+        <header class="head">
+          <div class="head-text">
+            <h1>Кандидаты</h1>
+            <p>Строки, которые есть в cheat-дампах и нет ни в одном clean</p>
+            <p id="truncNote" class="note" hidden></p>
+          </div>
+
+          <div id="stats" class="stats" hidden>
+            <div class="stat"><b id="statTotal">0</b><small>найдено</small></div>
+            <div class="stat"><b id="statSelected">0</b><small>в экспорте</small></div>
+            <div class="stat"><b id="statElapsed">0 с</b><small>заняло</small></div>
+          </div>
+        </header>
+
+        <p id="status" class="status" role="status" aria-live="polite" hidden></p>
+
+        <!-- Пока ничего не запускали -->
+        <section id="viewEmpty" class="view empty-view">
+          <svg class="venn" viewBox="0 0 380 200" role="img" aria-label="Схема: строки чита минус строки чистых дампов">
+            <defs>
+              <mask id="vennMask">
+                <rect width="380" height="200" fill="#000" />
+                <circle cx="240" cy="92" r="78" fill="#fff" />
+                <circle cx="140" cy="92" r="78" fill="#000" />
+              </mask>
+            </defs>
+            <rect width="380" height="200" class="venn-fill" mask="url(#vennMask)" />
+            <circle cx="140" cy="92" r="78" class="venn-clean" />
+            <circle cx="240" cy="92" r="78" class="venn-cheat" />
+            <text x="106" y="96" class="venn-label">clean</text>
+            <text x="190" y="96" class="venn-label">общее</text>
+            <text x="270" y="96" class="venn-label strong">только чит</text>
+            <text x="140" y="190" class="venn-caption">чистая игра</text>
+            <text x="240" y="190" class="venn-caption">игра с читом</text>
+          </svg>
+
+          <div class="empty-text">
+            <p class="lead">
+              Программа берёт строки из cheat-дампов и убирает те, что есть в чистых.
+              Остаётся то, что принадлежит только читу.
+            </p>
+
+            <ol class="howto">
+              <li>
+                Добавьте минимум два clean-дампа: память игры без чита, снятая в разных сессиях.
+              </li>
+              <li>
+                Добавьте один или несколько cheat-дампов с запущенным читом. Чем больше сессий,
+                тем стабильнее результат.
+              </li>
+              <li>
+                Нажмите «Запустить анализ», отметьте нужные строки и сохраните YARA-правило.
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Идёт анализ -->
+        <section id="viewRunning" class="view running-view" hidden>
+          <div class="big" id="runPercent">0%</div>
+          <p id="runStage" class="run-stage">Запуск движка</p>
+          <p class="run-note">
+            Большие дампы обрабатываются несколько минут. Анализ можно отменить кнопкой слева.
+          </p>
+        </section>
+
+        <!-- Результат -->
+        <section id="viewResults" class="view results-view" hidden>
+          <div class="toolbar">
+            <label class="search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+              <input id="search" type="search" placeholder="Поиск по строке" autocomplete="off" spellcheck="false" />
+            </label>
+
+            <div class="seg" role="group" aria-label="Кодировка">
+              <button type="button" class="on" data-enc="" aria-pressed="true">Все</button>
+              <button type="button" data-enc="ascii" aria-pressed="false">ASCII</button>
+              <button type="button" data-enc="utf16" aria-pressed="false">UTF-16</button>
+            </div>
+
+            <label class="select">
+              <span>Сортировка</span>
+              <select id="sortBy">
+                <option value="reliable">Сначала надёжные</option>
+                <option value="length">Длиннее выше</option>
+                <option value="entropy">Случайность выше</option>
+                <option value="alpha">По алфавиту</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="table">
+            <div class="table-scroll">
+              <table>
+                <colgroup>
+                  <col class="col-check" />
+                  <col />
+                  <col class="col-enc" />
+                  <col class="col-len" />
+                  <col class="col-ent" />
+                  <col class="col-hits" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th class="c-check"><span class="sr">В экспорт</span></th>
+                    <th>Строка</th>
+                    <th>Кодировка</th>
+                    <th class="r">Длина</th>
+                    <th class="r">Случайность</th>
+                    <th class="r">В дампах</th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+              <p id="empty" class="empty" hidden></p>
+            </div>
+
+            <div class="table-foot">
+              <div class="bulk">
+                <button id="checkView" type="button" class="link">Отметить все по фильтру</button>
+                <button id="uncheckView" type="button" class="link">Снять отметки</button>
+              </div>
+
+              <div class="more">
+                <span id="shownInfo"></span>
+                <button id="moreBtn" type="button" class="link strong" hidden>Показать ещё</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="export">
+            <label class="field">
+              <span>Имя YARA-правила</span>
+              <input id="ruleName" type="text" value="cheat_strings" maxlength="64" spellcheck="false" />
+            </label>
+
+            <label class="field">
+              <span>Совпадений для срабатывания</span>
+              <input id="minMatches" type="number" min="1" step="1" value="3" />
+            </label>
+
+            <div class="grow"></div>
+
+            <button id="exportTxt" type="button" class="btn">Сохранить .txt</button>
+            <button id="exportYara" type="button" class="btn primary">Сохранить .yar</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

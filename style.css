@@ -1,0 +1,1170 @@
+/* Шрифты лежат в папке fonts (Golos Text и JetBrains Mono, лицензия OFL): интерфейс работает офлайн. */
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/golos-text-cyrillic-400-normal.woff2") format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/golos-text-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/golos-text-cyrillic-500-normal.woff2") format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/golos-text-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/golos-text-cyrillic-600-normal.woff2") format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/golos-text-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jetbrains-mono-cyrillic-400-normal.woff2") format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jetbrains-mono-cyrillic-500-normal.woff2") format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jetbrains-mono-cyrillic-600-normal.woff2") format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+
+/* ==================================
+   ЦВЕТА И ШРИФТЫ
+
+   Основа: чернильный сине-фиолетовый, не чёрный.
+   Единственный яркий цвет: жёлтый «маркер», как у
+   выделителя на улике. Он нужен только для главных
+   действий, найденного текста и cheat-дампов.
+================================== */
+
+:root {
+  color-scheme: dark;
+
+  --ink: #12141f;
+  --slate: #1a1d2e;
+  --raised: #232740;
+  --line: #2c3150;
+  --line-soft: #232744;
+
+  --text: #e9eaf4;
+  --muted: #979bb8;
+  --faint: #626784;
+
+  --marker: #ffc857;
+  --marker-ink: #231a00;
+  --sky: #79c7ff;
+  --coral: #ff7b6b;
+  --mint: #8be0b0;
+  --clean-edge: #5f689a;
+  --clean-line: #7f88c4;
+
+  --ui: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+}
+
+/* ==================================
+   БАЗА
+================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font: 14px/1.5 var(--ui);
+  color: var(--text);
+  background: var(--ink);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 2px;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 344px minmax(0, 1fr);
+  height: 100vh;
+}
+
+.side-scroll,
+.table-scroll,
+.log pre,
+.empty-view {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* ==================================
+   ЛЕВАЯ ПАНЕЛЬ
+================================== */
+
+.side {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  background: var(--slate);
+  border-right: 1px solid var(--line);
+}
+
+.side-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 22px 20px 14px;
+  overflow-y: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mark {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+
+.mark-fill {
+  fill: var(--marker);
+}
+
+.mark-cheat,
+.mark-clean {
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.mark-cheat {
+  stroke: var(--marker);
+}
+
+.mark-clean {
+  stroke: var(--clean-line);
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.brand-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.group-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.count {
+  padding: 0 7px;
+  border-radius: 6px;
+  font: 500 12px var(--mono);
+  color: var(--muted);
+  background: var(--raised);
+}
+
+.count[data-state="need"] {
+  color: var(--marker);
+  background: rgba(255, 200, 87, 0.12);
+}
+
+.link {
+  padding: 2px 0;
+  border: 0;
+  font: 500 13px var(--ui);
+  text-align: left;
+  color: var(--muted);
+  background: none;
+  cursor: pointer;
+}
+
+.link:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.link:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.link.strong {
+  color: var(--text);
+}
+
+/* ---------- зоны для файлов ---------- */
+
+.dropzone {
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
+}
+
+.dropzone:not(.has-files) {
+  border: 1px dashed var(--line);
+}
+
+.dropzone.over {
+  outline: 1px dashed var(--marker);
+  outline-offset: 2px;
+  background: rgba(255, 200, 87, 0.06);
+}
+
+.drop-hint {
+  padding: 18px 12px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.dropzone.has-files .drop-hint {
+  display: none;
+}
+
+.filelist {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.filelist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 5px 5px 12px;
+  border-left: 3px solid var(--clean-edge);
+  border-radius: 8px;
+  background: var(--ink);
+}
+
+.filelist.cheat li {
+  border-left-color: var(--marker);
+}
+
+.file-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 12.5px var(--mono);
+  color: #c9ccdf;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  font: 16px/1 var(--ui);
+  color: var(--faint);
+  background: none;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: var(--coral);
+  background: rgba(255, 123, 107, 0.12);
+}
+
+/* ---------- параметры ---------- */
+
+.params summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.params summary::-webkit-details-marker {
+  display: none;
+}
+
+.params summary:hover {
+  border-color: #3a4068;
+}
+
+.params-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.params-text strong {
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.params-text small {
+  font: 12px/1.4 var(--mono);
+  color: var(--muted);
+}
+
+.chevron {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-right: 3px;
+  border: solid var(--faint);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.params[open] .chevron {
+  transform: rotate(225deg);
+}
+
+.params-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-width: 0;
+  margin: 12px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.params-grid .wide {
+  grid-column: 1 / -1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.field > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.field small {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--faint);
+}
+
+.field input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font: 13px var(--mono);
+  color: var(--text);
+  background: var(--ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.field input:focus {
+  border-color: #59608f;
+}
+
+.field input:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 1px;
+}
+
+.field input::placeholder {
+  color: var(--faint);
+}
+
+.params-grid:disabled {
+  opacity: 0.5;
+}
+
+/* ---------- журнал ---------- */
+
+.log summary {
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.log summary:hover {
+  color: var(--text);
+}
+
+.log pre {
+  max-height: 180px;
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  overflow: auto;
+  border-radius: 8px;
+  font: 11.5px/1.5 var(--mono);
+  color: var(--muted);
+  background: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ---------- запуск ---------- */
+
+.run {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 20px 14px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.run-hint {
+  font-size: 12.5px;
+  color: var(--marker);
+}
+
+.run-hint:empty {
+  display: none;
+}
+
+.stage {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.stage span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stage b {
+  font: 500 12.5px var(--mono);
+  color: var(--text);
+}
+
+.steps {
+  display: flex;
+  gap: 4px;
+  min-height: 6px;
+}
+
+.steps span {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--raised);
+}
+
+.steps .done {
+  background: var(--marker);
+}
+
+.steps .now {
+  background: linear-gradient(90deg, var(--marker) var(--p, 0%), var(--raised) var(--p, 0%));
+}
+
+.btn-run {
+  height: 46px;
+  border: 0;
+  border-radius: 10px;
+  font: 600 15px var(--ui);
+  color: var(--marker-ink);
+  background: var(--marker);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-run:hover:not(:disabled) {
+  background: #ffd475;
+}
+
+.btn-run:disabled {
+  color: var(--faint);
+  background: var(--raised);
+  cursor: not-allowed;
+}
+
+.btn-run.cancel {
+  color: var(--coral);
+  background: none;
+  border: 1px solid rgba(255, 123, 107, 0.5);
+}
+
+.btn-run.cancel:hover {
+  background: rgba(255, 123, 107, 0.1);
+}
+
+.py {
+  font: 11.5px var(--mono);
+  color: var(--faint);
+}
+
+#pyStatus[data-state="error"] {
+  color: var(--coral);
+}
+
+/* ==================================
+   ПРАВАЯ ЧАСТЬ
+================================== */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 28px 0;
+}
+
+.head h1 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.head-text p {
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.head-text .note {
+  font-size: 12.5px;
+  color: var(--marker);
+}
+
+.stats {
+  display: flex;
+  gap: 34px;
+  flex: none;
+}
+
+.stat {
+  text-align: right;
+}
+
+.stat b {
+  display: block;
+  font: 600 22px/1.1 var(--mono);
+  letter-spacing: -0.02em;
+}
+
+.stat small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.status {
+  margin: 14px 28px 0;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--slate);
+}
+
+.status[data-kind="error"] {
+  border-left-color: var(--coral);
+  color: #ffc9c2;
+}
+
+.status[data-kind="warn"] {
+  border-left-color: var(--marker);
+  color: #ffe2a3;
+}
+
+.status[data-kind="ok"] {
+  border-left-color: var(--mint);
+  color: #c4f0d6;
+}
+
+.view {
+  flex: 1;
+  min-height: 0;
+}
+
+/* ---------- пусто ---------- */
+
+.empty-view {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px 52px;
+  padding: 20px 40px 44px;
+  overflow: auto;
+}
+
+.venn {
+  width: min(380px, 100%);
+  flex: none;
+}
+
+.venn-fill {
+  fill: var(--marker);
+  opacity: 0.92;
+}
+
+.venn-clean,
+.venn-cheat {
+  fill: none;
+  stroke-width: 2;
+}
+
+.venn-clean {
+  stroke: var(--clean-line);
+}
+
+.venn-cheat {
+  stroke: var(--marker);
+}
+
+.venn text {
+  text-anchor: middle;
+  font: 500 13px var(--mono);
+}
+
+.venn-label {
+  fill: var(--muted);
+}
+
+.venn-label.strong {
+  fill: var(--marker-ink);
+  font-weight: 600;
+}
+
+.venn .venn-caption {
+  fill: var(--faint);
+  font: 400 12.5px var(--ui);
+}
+
+.empty-text {
+  flex: 1 1 320px;
+  max-width: 44ch;
+}
+
+.lead {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.howto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0 0 0 22px;
+  color: var(--muted);
+}
+
+.howto li::marker {
+  font-family: var(--mono);
+  color: var(--marker);
+}
+
+/* ---------- идёт анализ ---------- */
+
+.running-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 40px 60px;
+  text-align: center;
+}
+
+.big {
+  font: 600 76px/1 var(--mono);
+  letter-spacing: -0.04em;
+}
+
+.run-stage {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 14px var(--mono);
+  color: var(--text);
+}
+
+.run-note {
+  max-width: 46ch;
+  color: var(--muted);
+}
+
+/* ---------- результат ---------- */
+
+.results-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px 14px;
+}
+
+.search,
+.select,
+.seg {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--slate);
+}
+
+.search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+  height: 40px;
+  padding: 0 14px;
+  color: var(--faint);
+}
+
+.search:focus-within {
+  border-color: #59608f;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  font: 13px var(--mono);
+  color: var(--text);
+  background: none;
+  outline: none;
+}
+
+.seg {
+  display: flex;
+  padding: 3px;
+}
+
+.seg button {
+  height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 7px;
+  font: 500 13px var(--ui);
+  color: var(--muted);
+  background: none;
+  cursor: pointer;
+}
+
+.seg button:hover {
+  color: var(--text);
+}
+
+.seg .on {
+  color: var(--text);
+  background: var(--raised);
+}
+
+.select {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 32px 0 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.select::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 15px;
+  width: 6px;
+  height: 6px;
+  border: solid var(--faint);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.select select {
+  padding: 0;
+  border: 0;
+  font: 500 13px var(--ui);
+  color: var(--text);
+  background: none;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select select:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 4px;
+}
+
+.select option {
+  color: var(--text);
+  background: var(--slate);
+}
+
+/* ---------- таблица ---------- */
+
+.table {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0 28px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--slate);
+}
+
+.table-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.col-check {
+  width: 44px;
+}
+
+.col-enc {
+  width: 104px;
+}
+
+.col-len {
+  width: 64px;
+}
+
+.col-ent {
+  width: 132px;
+}
+
+.col-hits {
+  width: 92px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 38px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--muted);
+  background: #171a29;
+}
+
+th.r,
+td.r {
+  text-align: right;
+}
+
+tbody td {
+  padding: 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+td.c-check {
+  text-align: center;
+}
+
+td.str code {
+  font: 13px/1.45 var(--mono);
+  color: #eceef8;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+mark {
+  padding: 0 1px;
+  border-radius: 3px;
+  color: #ffe2a3;
+  background: rgba(255, 200, 87, 0.28);
+  box-shadow: inset 0 -2px 0 var(--marker);
+}
+
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: 500 11.5px var(--mono);
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.badge[data-enc="2"] {
+  color: var(--sky);
+  border-color: rgba(121, 199, 255, 0.4);
+  background: rgba(121, 199, 255, 0.07);
+}
+
+.num {
+  font: 13px var(--mono);
+  color: #c9ccdf;
+  font-variant-numeric: tabular-nums;
+}
+
+.ent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.bar {
+  position: relative;
+  width: 52px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--raised);
+}
+
+.bar::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w, 0%);
+  border-radius: 2px;
+  background: var(--clean-line);
+}
+
+.dots {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.dots i.on {
+  background: var(--text);
+}
+
+tr.off .str,
+tr.off .badge,
+tr.off .num,
+tr.off .dots,
+tr.off .bar {
+  opacity: 0.38;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 1.5px solid var(--faint);
+  border-radius: 5px;
+  vertical-align: middle;
+  background: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  border-color: #dfe2f2;
+  background: #dfe2f2;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--faint);
+}
+
+.table-foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 40px;
+  padding: 0 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.bulk,
+.more {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ---------- экспорт ---------- */
+
+.export {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  padding: 16px 28px 20px;
+}
+
+.export .field:nth-of-type(1) {
+  width: 220px;
+}
+
+.export .field:nth-of-type(2) {
+  width: 200px;
+}
+
+.grow {
+  flex: 1;
+}
+
+.btn {
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: 600 14px var(--ui);
+  color: var(--text);
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--raised);
+}
+
+.btn.primary {
+  border-color: var(--marker);
+  color: var(--marker-ink);
+  background: var(--marker);
+}
+
+.btn.primary:hover {
+  background: #ffd475;
+}
+
+/* ==================================
+   УЗКОЕ ОКНО И ДВИЖЕНИЕ
+================================== */
+
+@media (max-width: 1100px) {
+  .app {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+
+  .stats {
+    gap: 22px;
+  }
+}
+
+@media (max-height: 720px) {
+  .empty-view {
+    gap: 14px 40px;
+    padding-top: 6px;
+    padding-bottom: 24px;
+  }
+
+  .venn {
+    width: min(290px, 100%);
+  }
+
+  .lead {
+    font-size: 15px;
+  }
+
+  .howto {
+    gap: 8px;
+    margin-top: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
